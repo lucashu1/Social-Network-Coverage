@@ -46,7 +46,7 @@ def coverage(selected_nodes, graph):
 
 	for node in graph.keys():
 		for selected_node in selected_nodes:
-			if selected_node in neighbors(node, graph):
+			if selected_node in neighbors(node, graph) and node not in covered:
 				covered.add(node)
 
 	return len(covered)
@@ -65,7 +65,7 @@ def greedy(k, graph):
 	selected_nodes = []
 
 	# Repeat k times:
-	for i in range(k):
+	while len(selected_nodes) < k:
 		current_coverage = coverage(selected_nodes, graph)
 
 		unselected_nodes = set(graph.keys()) - set(selected_nodes)
