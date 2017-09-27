@@ -61,7 +61,7 @@ def marginal_coverage(node, selected_nodes, graph):
 
 # Greedily selects k nodes from network to maximize coverage
 # Returns tuple: (final coverage, selected nodes)
-def greedy(k, graph):
+def greedy_coverage(k, graph):
 	selected_nodes = []
 
 	# Repeat k times:
@@ -85,13 +85,53 @@ def greedy(k, graph):
 	return coverage(selected_nodes, graph), selected_nodes
 
 
+# Randomly select k nodes from the graph, find coverage
+# Returns tuple: (final coverage, selected nodes)
+def random_coverage(k, graph):
+	selected_nodes = random.sample(graph.keys(), k)
+	return coverage(selected_nodes, graph), selected_nodes
 
 
-random.seed(0)
+# Find the degree of a given node in a graph
+# I.e. How many times this node shows up in other nodes' neighbors lists
+def degree(node, graph):
+	degree = 0
+
+	for n in graph.keys():
+		if node in neighbors(n, graph):
+			degree += 1
+
+	return degree
 
 
-x = create_graph(NUM_NODES, 'medium')
-selected_nodes=[5, 100, 40, 60, 70, 31]
+# Return an ascending argsorted list
+def argsort(seq):
+	return [i for (v, i) in sorted((v, i) for (i, v) in enumerate(seq))]
 
-print(coverage(selected_nodes, x))
-print(greedy(6, x))
+
+# Greedily select k nodes with highest degrees, find coverage
+# Returns tuple: (final coverage, selected nodes)
+def degree_coverage(k, graph):
+
+	# List of degree values for each node
+	all_degrees = [degree(n, graph) for n in graph.keys()]
+
+	# Argsort based on degrees, then reverse the list (descending order)
+	sorted_nodes = argsort(all_degrees)[::-1]
+
+	# Get k nodes with highest degrees
+	selected_nodes = sorted_nodes[0:k]
+
+	return coverage(selected_nodes, graph), selected_nodes
+
+
+# random.seed(0)
+
+
+# x = create_graph(NUM_NODES, 'medium')
+# selected_nodes=[5, 100, 40, 60, 70, 31]
+
+# print(coverage(selected_nodes, x))
+# print(greedy_coverage(6, x))
+# print(degree_coverage(6, x))
+# print(random_coverage(6, x))
