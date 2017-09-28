@@ -61,6 +61,7 @@ def marginal_coverage(node, selected_nodes, graph):
 
 # Greedily selects k nodes from network to maximize coverage
 # Returns tuple: (final coverage, selected nodes)
+# Note: If all nodes already covered during the loop, selected_nodes will include (-1)
 def greedy_coverage(k, graph):
 	selected_nodes = []
 
