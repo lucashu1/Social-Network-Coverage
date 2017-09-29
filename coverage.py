@@ -1,4 +1,5 @@
 import random
+import math
 
 NUM_NODES = 200
 
@@ -114,16 +115,46 @@ def argsort(seq):
 # Returns tuple: (final coverage, selected nodes)
 def degree_coverage(k, graph):
 
-	# List of degree values for each node
-	all_degrees = [degree(n, graph) for n in graph.keys()]
+	# Get (node_num, degree) tuples for all nodes
+	node_degrees = [(n, degree(n, graph)) for n in graph.keys()]
 
-	# Argsort based on degrees, then reverse the list (descending order)
-	sorted_nodes = argsort(all_degrees)[::-1]
+	# Sort tuples by degree (2nd element in tuple)
+	node_degrees.sort(key=lambda pair: pair[1], reverse=True)
 
-	# Get k nodes with highest degrees
-	selected_nodes = sorted_nodes[0:k]
+	# Keep only the node numbers
+	sorted_node_nums = [n for (n, degree) in node_degrees]
 
+	# Get the top k node numbers
+	selected_nodes = sorted_node_nums[0:k]
+
+	# Calculate and return coverage based on those last nodes
 	return coverage(selected_nodes, graph), selected_nodes
+
+
+
+# First, sort selected_nodes by descending order of degree
+# Then, select last K*alpha nodes and return those
+def final_nodes(selected_nodes, graph, alpha):
+	K = len(selected_nodes)
+	nodes_to_select = math.floor(alpha*K)
+
+	# Get (node_num, degree) tuples for all selected nodes
+	selected_node_degrees = [(n, degree(n, graph)) for n in selected_nodes]
+	# print(selected_node_degrees)
+
+	# Sort tuples list based on degree (2nd element in pair)
+	selected_node_degrees.sort(key=lambda pair: pair[1], reverse=True)
+	# print(selected_node_degrees)
+
+	# Keep only the node numbers
+	sorted_node_nums = [n for (n, degree) in selected_node_degrees]
+	# print(sorted_node_nums)
+
+	# Get last alpha*K nodes
+	return sorted_node_nums[-nodes_to_select:]
+
+
+
 
 
 # random.seed(0)
