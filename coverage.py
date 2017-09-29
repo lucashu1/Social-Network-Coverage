@@ -134,6 +134,7 @@ def degree_coverage(k, graph):
 
 # First, sort selected_nodes by descending order of degree
 # Then, select last K*alpha nodes and return those
+# Use example: not all the selected people show up to the intervention training
 def final_nodes(selected_nodes, graph, alpha):
 	K = len(selected_nodes)
 	nodes_to_select = math.floor(alpha*K)
@@ -152,6 +153,14 @@ def final_nodes(selected_nodes, graph, alpha):
 
 	# Get last alpha*K nodes
 	return sorted_node_nums[-nodes_to_select:]
+
+
+# Return final coverage given list of initially selected nodes, graph, and alpha
+# Alpha controls what fraction of people will show up to the intervention training
+def final_coverage(initially_selected_nodes, graph, alpha):
+	final_selected_nodes = final_nodes(initially_selected_nodes, graph, alpha)
+	return coverage(final_selected_nodes, graph)
+
 
 
 # Return average number of neighbors each node in a given graph has

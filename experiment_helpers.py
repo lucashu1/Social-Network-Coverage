@@ -20,7 +20,7 @@ def get_neighbors_dict(graph):
 
 # Takes in a graph in neighbor-dict representation
 # Save a 3 line-plot image for given (graph, k, file_name)
-def make_plot(graph, K, plot_title, file_name, x_tick_freq=2):
+def make_plot(graph, K, plot_title, file_name, alpha = -1, x_tick_freq=2):
 	
 	# Clear plt just in case
 	plt.clf()
@@ -31,14 +31,26 @@ def make_plot(graph, K, plot_title, file_name, x_tick_freq=2):
 	random_coverages = []
 
 	for i in range(1, K+1):
-		greedy_coverage = coverage.greedy_coverage(i, graph)[0]
-		degree_coverage = coverage.degree_coverage(i, graph)[0]
-		random_coverage = coverage.random_coverage(i, graph)[0]
 
-		greedy_coverages.append(greedy_coverage)
-		degree_coverages.append(degree_coverage)
-		random_coverages.append(random_coverage)
+		# If no alpha given: assume all nodes selected 
+		if alpha == -1:
+			greedy_coverage = coverage.greedy_coverage(i, graph)[0]
+			degree_coverage = coverage.degree_coverage(i, graph)[0]
+			random_coverage = coverage.random_coverage(i, graph)[0]
 
+			greedy_coverages.append(greedy_coverage)
+			degree_coverages.append(degree_coverage)
+			random_coverages.append(random_coverage)
+
+		# If given alpha: assume not everyone attends the training
+		else:
+			greedy_nodes = coverage.greedy_coverage(i, graph)[1]
+			degree_nodes = coverage.degree_coverage(i, graph)[1]
+			random_nodes = coverage.random_coverage(i, graph)[1]
+
+			greedy_coverages.append(coverage.final_coverage(greedy_nodes, graph, alpha))
+			degree_coverages.append(coverage.final_coverage(degree_nodes, graph, alpha))
+			random_coverages.append(coverage.final_coverage(random_nodes, graph, alpha))
 
 	# Create the plot
 	plt.plot(range(1, K+1), greedy_coverages)
