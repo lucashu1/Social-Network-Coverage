@@ -2,7 +2,7 @@ from networkx import *
 import coverage
 import matplotlib.pyplot as plt
 
-# Function 1: convert networkx graph to dictionary representation
+# Convert networkx graph to dictionary representation
 def get_neighbors_dict(graph):
 
 	neighbors_dict = {}
@@ -52,4 +52,3 @@ def make_plot(graph, K, plot_title, file_name, x_tick_freq=2):
 	plt.savefig(file_name)
 	plt.clf()
 
-	
