@@ -52,8 +52,4 @@ def make_plot(graph, K, plot_title, file_name, x_tick_freq=2):
 	plt.savefig(file_name)
 	plt.clf()
 
-
-
-
-	# do stuff
-	return 0
+	
