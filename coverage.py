@@ -135,30 +135,37 @@ def degree_coverage(k, graph):
 # First, sort selected_nodes by descending order of degree
 # Then, select last K*alpha nodes and return those
 # Use example: not all the selected people show up to the intervention training
-def final_nodes(selected_nodes, graph, alpha):
+def final_nodes(selected_nodes, graph, alpha, rand=False):
 	K = len(selected_nodes)
 	nodes_to_select = math.floor(alpha*K)
 
-	# Get (node_num, degree) tuples for all selected nodes
-	selected_node_degrees = [(n, degree(n, graph)) for n in selected_nodes]
-	# print(selected_node_degrees)
+	# If not random: select nodes with lowest degree
+	if rand == False:
+		# Get (node_num, degree) tuples for all selected nodes
+		selected_node_degrees = [(n, degree(n, graph)) for n in selected_nodes]
+		# print(selected_node_degrees)
 
-	# Sort tuples list based on degree (2nd element in pair)
-	selected_node_degrees.sort(key=lambda pair: pair[1], reverse=True)
-	# print(selected_node_degrees)
+		# Sort tuples list based on degree (2nd element in pair)
+		selected_node_degrees.sort(key=lambda pair: pair[1], reverse=True)
+		# print(selected_node_degrees)
 
-	# Keep only the node numbers
-	sorted_node_nums = [n for (n, degree) in selected_node_degrees]
-	# print(sorted_node_nums)
+		# Keep only the node numbers
+		sorted_node_nums = [n for (n, degree) in selected_node_degrees]
+		# print(sorted_node_nums)
 
-	# Get last alpha*K nodes
-	return sorted_node_nums[-nodes_to_select:]
+		# Get last alpha*K nodes
+		return sorted_node_nums[-nodes_to_select:]
+
+	# Otherwise: randomly select K*alpha nodes
+	else:
+		return random.sample(selected_nodes, nodes_to_select)
+
 
 
 # Return final coverage given list of initially selected nodes, graph, and alpha
 # Alpha controls what fraction of people will show up to the intervention training
-def final_coverage(initially_selected_nodes, graph, alpha):
-	final_selected_nodes = final_nodes(initially_selected_nodes, graph, alpha)
+def final_coverage(initially_selected_nodes, graph, alpha, rand=False):
+	final_selected_nodes = final_nodes(initially_selected_nodes, graph, alpha, rand)
 	return coverage(final_selected_nodes, graph)
 
 

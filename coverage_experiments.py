@@ -31,17 +31,13 @@ experiment_helpers.make_plot(erdos_medium, K=MAX_K, \
 	file_name='erdos_medium.png', x_tick_freq=2)
 
 experiment_helpers.make_plot(barabasi_medium, K=MAX_K, \
-	plot_title="Barabasi-Albert (Medium) Graph Coverage\nn=200 m = 3", \
+	plot_title="Barabasi-Albert (Medium) Graph Coverage\nn = 200, m = 3", \
 	file_name='barabasi_medium.png', x_tick_freq=2)
 
 experiment_helpers.make_plot(cluster_medium, K=MAX_K, \
-	plot_title="Powerlaw Cluster (Medium) Graph Coverage\nn=200 m = 3 p = 0.01", \
+	plot_title="Powerlaw Cluster (Medium) Graph Coverage\nn = 200, m = 3, p = 0.01", \
 	file_name='cluster_medium.png', x_tick_freq=2)
 
-
-
-# TODO: repeat for sparse (1-3), dense (8-10)
-	# Medium was 4-7 
 
 
 # ----------------- SPARSE GRAPHS --------------------
@@ -67,11 +63,11 @@ experiment_helpers.make_plot(erdos_sparse, K=MAX_K, \
 	file_name='erdos_sparse.png', x_tick_freq=2)
 
 experiment_helpers.make_plot(barabasi_sparse, K=MAX_K, \
-	plot_title="Barabasi-Albert (Sparse) Graph Coverage\nn=200 m = 1", \
+	plot_title="Barabasi-Albert (Sparse) Graph Coverage\nn = 200, m = 1", \
 	file_name='barabasi_sparse.png', x_tick_freq=2)
 
 experiment_helpers.make_plot(cluster_sparse, K=MAX_K, \
-	plot_title="Powerlaw Cluster (Sparse) Graph Coverage\nn=200 m = 1 p = 0.01", \
+	plot_title="Powerlaw Cluster (Sparse) Graph Coverage\nn = 200, m = 1, p = 0.01", \
 	file_name='cluster_sparse.png', x_tick_freq=2)
 
 
@@ -100,11 +96,11 @@ experiment_helpers.make_plot(erdos_dense, K=MAX_K, \
 	file_name='erdos_dense.png', x_tick_freq=2)
 
 experiment_helpers.make_plot(barabasi_dense, K=MAX_K, \
-	plot_title="Barabasi-Albert (Dense) Graph Coverage\nn=200 m = 5", \
+	plot_title="Barabasi-Albert (Dense) Graph Coverage\nn = 200, m = 5", \
 	file_name='barabasi_dense.png', x_tick_freq=2)
 
 experiment_helpers.make_plot(cluster_medium, K=MAX_K, \
-	plot_title="Powerlaw Cluster (Dense) Graph Coverage\nn=200 m = 5 p = 0.01", \
+	plot_title="Powerlaw Cluster (Dense) Graph Coverage\nn = 200, m = 5, p = 0.01", \
 	file_name='cluster_dense.png', x_tick_freq=2)
 
 
