@@ -172,7 +172,7 @@ def final_coverage(initially_selected_nodes, graph, alpha, rand=False):
 
 # Return average number of neighbors each node in a given graph has
 def average_neighbors(graph):
-	num_neighbors = [len(graph[n]) for n in graph.keys()]
+	num_neighbors = [len(graph[n]) for n in list(graph.keys())]
 	avg_neighbors = sum(num_neighbors)/float(len(num_neighbors))
 	return avg_neighbors
 

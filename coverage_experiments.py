@@ -52,7 +52,7 @@ erdos_sparse = experiment_helpers.get_neighbors_dict(erdos_graph_sparse)
 barabasi_sparse = experiment_helpers.get_neighbors_dict(barabasi_graph_sparse)
 cluster_sparse = experiment_helpers.get_neighbors_dict(cluster_graph_sparse)
 
-# Make sure graphs have medium density
+# Make sure graphs have low density
 print("Erdos (Sparse) Neighbors: ", coverage.average_neighbors(erdos_sparse))
 print("Barabasi (Sparse) Neighbors: ", coverage.average_neighbors(barabasi_sparse))
 print("Cluster (Sparse) Neighbors: ", coverage.average_neighbors(cluster_sparse))
@@ -85,7 +85,7 @@ erdos_dense = experiment_helpers.get_neighbors_dict(erdos_graph_dense)
 barabasi_dense = experiment_helpers.get_neighbors_dict(barabasi_graph_dense)
 cluster_dense = experiment_helpers.get_neighbors_dict(cluster_graph_dense)
 
-# Make sure graphs have medium density
+# Make sure graphs have high density
 print("Erdos (Dense) Neighbors: ", coverage.average_neighbors(erdos_dense))
 print("Barabasi (Dense) Neighbors: ", coverage.average_neighbors(barabasi_dense))
 print("Cluster (Dense) Neighbors: ", coverage.average_neighbors(cluster_dense))
